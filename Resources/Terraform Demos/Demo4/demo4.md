@@ -1,0 +1,2 @@
+## Demo 4
+1. This demo is an example of how to NOT write terraform. The demo is to take this configuration and refactor it to be more modular and reusable, hiding secrets and removing hard-coded values
