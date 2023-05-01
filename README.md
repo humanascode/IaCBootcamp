@@ -11,6 +11,7 @@ This repository is organized into the following folders:
 - **Lab Guides**: Contains the lab guides for each day of the bootcamp.
   - [Day1-Lab](./Lab%20Guides/Day1-Lab)
   - [Day2-Lab](./Lab%20Guides/Day2-Lab)
+  - [Day3-Lab](./Lab%20Guides/Day3-Lab)
 - **Resources**: Contains additional resources and Terraform demos.
   - **Terraform Demos**: Contains Terraform demo configurations for the bootcamp.
     - [Demo1](./Resources/Terraform%20Demos/Demo1)
