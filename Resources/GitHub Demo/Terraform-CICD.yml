@@ -1,0 +1,95 @@
+name: Terraform-CI-CD
+on:
+  push:
+
+jobs:
+    terraform-ci:
+      name: Terraform CI
+      runs-on: ubuntu-latest
+      steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Install the preferred version of Terraform CLI 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+        # Initialize the Terraform working directory
+      - name: Terraform Init
+        id: init
+        env:
+            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+            STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+            CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+
+        # Run a terraform format check
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+
+        # Run a terraform validate check
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        id: plan
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        run: |
+         terraform plan -out tfplan -no-color
+
+      # Upload the tfplan artifact
+      - name: Upload tfplan artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: tfplan-${{ github.run_id }}
+          path: tfplan
+
+    terraform-cd:
+         name: Terraform CD
+         needs: terraform-ci
+         runs-on: ubuntu-latest
+         steps:
+         - name: Checkout
+           uses: actions/checkout@v2
+        
+         - name: Setup Terraform
+           uses: hashicorp/setup-terraform@v1
+        
+         # Download the tfplan artifact with run_id
+         - name: Download tfplan artifact
+           uses: actions/download-artifact@v2
+           with:
+             name: tfplan-${{ github.run_id }}
+             path: tfplan
+        
+         - name: Terraform Init
+           id: init
+           env:
+            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+            RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+            STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+            CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+           run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+           # Apply the tfplan
+
+         - name: Terraform Apply
+           env:
+            ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+            ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+            ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+            ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+           run: terraform apply tfplan/tfplan
