@@ -51,7 +51,7 @@ If you haven't already, sign in to your GitHub account or create a new account
 
 - In the repository, create a new file called `.gitignore` 
 - Add the following lines to the `.gitignore` file:
-```.terraform/
+```**/.terraform/*
 *.tfstate
 *.tfstate.backup
 *.tfvars
