@@ -38,6 +38,7 @@ In this lab, you will refactor the Terraform configuration from Lab 1 to create 
 - Choose to use either the ["count" loop](https://www.terraform.io/docs/language/meta-arguments/count.html) or the ["foreach" loop](https://www.terraform.io/docs/language/meta-arguments/for_each.html)
 - If using the "count" loop, modify the VM resource block in your main Terraform configuration to use the "count" meta-argument, and provide a variable for the number of VMs required
 - If using the "foreach" loop, create a list or map containing the VM details (e.g., names, sizes) and modify the VM resource block to use the "for_each" meta-argument, and provide the list or map as the value
+>**Note**: You can use [Demo7](./Resources/Terraform%20Demos/Demo7) for an example using the count loop
 
 
 ### 3. Test your changes
