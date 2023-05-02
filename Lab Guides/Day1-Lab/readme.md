@@ -117,7 +117,7 @@ provider "azurerm" {
 execution plan
 > **Note:** If you want to supply variable values using the command line, you can use the `-var` flag. For example: `terraform plan -var="location=westeurope" -out <tfplan file name>`
 - Review the plan and confirm the resources to be created
-- Run the command `terraform apply tfplan file name` to apply the configuration and create the resources
+- Run the command `terraform apply <tfplan file name>` to apply the configuration and create the resources
 - Confirm the creation of the resources in the Azure portal
 - When done, run the command `terraform destroy` to destroy the resources
 > **Note:** When running `terraform destroy`, you will need to provide the values for the variables you defined in your Terraform configuration (same as you did with `terraform plan`). You can do this by using the `-var` flag. For example: `terraform destroy -var="location=westeurope"`
