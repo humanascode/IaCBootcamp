@@ -14,12 +14,12 @@ This repository is organized into the following folders:
   - [Day3-Lab](./Lab%20Guides/Day3-Lab)
 - **Resources**: Contains additional resources and Terraform demos.
   - **Terraform Demos**: Contains Terraform demo configurations for the bootcamp.
-    - [Demo1](./Resources/Terraform%20Demos/Demo1)
-    - [Demo2](./Resources/Terraform%20Demos/Demo2)
-    - [Demo3](./Resources/Terraform%20Demos/Demo3)
-    - [Demo4](./Resources/Terraform%20Demos/Demo4)
-    - [Demo5](./Resources/Terraform%20Demos/Demo5)
-    - [Demo7](./Resources/Terraform%20Demos/Demo7)
-    - [Demo8](./Resources/Terraform%20Demos/Demo8-UsingModules)
+    - [Demo1-SimpleDeployment](./Resources/Terraform%20Demos/Demo1)
+    - [Demo2-MakingChanges](./Resources/Terraform%20Demos/Demo2)
+    - [Demo3-TerraformFolder](./Resources/Terraform%20Demos/Demo3)
+    - [Demo4-UsingVariables](./Resources/Terraform%20Demos/Demo4)
+    - [Demo5-BackendConfiguration](./Resources/Terraform%20Demos/Demo5)
+    - [Demo7-UsingLoops](./Resources/Terraform%20Demos/Demo7)
+    - [Demo8-UsingModules](./Resources/Terraform%20Demos/Demo8-UsingModules)
 
 Please navigate to the respective folders for more information and instructions on each lab or demo.
