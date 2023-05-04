@@ -54,6 +54,8 @@ To create the secrets:
 
 ### 4. Configure the Terraform CI job
 
+>**Note**: You can use the following workflow as reference: [CICD Workflow Demo](./Resources/GitHub%20Demo/Terraform-CICD.yml)
+
 Configure the following steps in the CI job:
 
 1. Checkout the repository to the GitHub Actions runner
