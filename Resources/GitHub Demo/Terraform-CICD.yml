@@ -36,7 +36,7 @@ jobs:
         # Run a terraform validate check
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate
 
       - name: Terraform Plan
         id: plan
@@ -46,7 +46,7 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: |
-         terraform plan -out tfplan -no-color
+         terraform plan -out tfplan
 
       # Upload the tfplan artifact
       - name: Upload tfplan artifact
@@ -93,3 +93,7 @@ jobs:
             ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
             ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
            run: terraform apply tfplan/tfplan
+
+         - uses: geekyeggo/delete-artifact@v2
+           with:
+               name: tfplan-${{ github.run_id }}
