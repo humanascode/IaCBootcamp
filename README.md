@@ -20,5 +20,6 @@ This repository is organized into the following folders:
     - [Demo4](./Resources/Terraform%20Demos/Demo4)
     - [Demo5](./Resources/Terraform%20Demos/Demo5)
     - [Demo7](./Resources/Terraform%20Demos/Demo7)
+    - [Demo8](./Resources/Terraform%20Demos/Demo8-UsingModules)
 
 Please navigate to the respective folders for more information and instructions on each lab or demo.
